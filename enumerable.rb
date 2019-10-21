@@ -48,9 +48,18 @@ module Enumerable
         end
         false
     end
-    def my_none?
 
+    def my_none?
+        i = 0
+        while i < self.size
+            if yield(self[i])
+                return false
+            end
+            i += 1
+        end
+        true
     end
+
     def my_count
 
     end
@@ -81,3 +90,7 @@ puts
 p ['lpha', 'apple', 'llen key'].my_any?{ |x| x[0] == 'a' }
 puts
 p ['lpha', 'pple', 'allen key'].any?{ |x| x[0] == 'a' }
+puts
+p ['lpha', 'pple', 'llen key'].my_none?{ |x| x[0] == 'a' }
+puts
+p ['lpha', 'pple', 'llen key'].none?{ |x| x[0] == 'a' }
