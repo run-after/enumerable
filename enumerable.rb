@@ -1,6 +1,9 @@
 module Enumerable
     def my_each(array)
-        
+        i = 0
+        while i < array.size
+            yield
+        end
     end
     def my_each_with_index
         
