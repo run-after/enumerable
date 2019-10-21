@@ -1,12 +1,17 @@
 module Enumerable
-    def my_each(array)
+    def my_each
         i = 0
-        while i < array.size
-            yield
+        while i < self.size
+            yield(self[i])
+            i += 1
         end
     end
     def my_each_with_index
-        
+        i = 0
+        while i < self.size
+            yield(self[i], i)
+            i += 1
+        end        
     end
     def my_select
 
@@ -30,3 +35,6 @@ module Enumerable
 
     end
 end
+
+[1, 2, 3, 5].my_each { |x| p x }
+[1, 2, 3, 5].my_each_with_index { |x, y| puts "#{x} at #{y}" }
