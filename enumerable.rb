@@ -71,7 +71,6 @@ module Enumerable
                     count += 1    
                 end
                 i += 1
-                
             end
             count
         else
@@ -85,10 +84,18 @@ module Enumerable
             end
             count
         end
-
     end
 
     def my_map
+        i = 0
+        array2 = []
+        while i < self.size
+            if yield(self[i])
+                array2 << self[i]
+            end
+            i += 1
+        end
+        array2
 
     end
 
