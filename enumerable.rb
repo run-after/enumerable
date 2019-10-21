@@ -90,9 +90,7 @@ module Enumerable
         i = 0
         array2 = []
         while i < self.size
-            if yield(self[i])
-                array2 << self[i]
-            end
+            array2 << yield(self[i])
             i += 1
         end
         array2
@@ -132,3 +130,7 @@ puts
 p [1,2,3,4,4,7,7,7,9].my_count { |i| i > 1 }
 puts
 p [1,2,3,4,4,7,7,7,9].count { |i| i > 1 }
+puts
+p [1,2,3,4,4,7,7,7,9].my_map { |i| i * 2 }
+puts
+p [1,2,3,4,4,7,7,7,9].map { |i| i*2 }
