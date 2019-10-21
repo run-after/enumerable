@@ -26,10 +26,19 @@ module Enumerable
         end
         array2
     end
-    
-    def my_all?
 
+    def my_all?
+        i = 0
+        
+        while i < self.size
+            unless yield(self[i])
+                return false
+            end
+            i += 1
+        end
+        true
     end
+
     def my_any?
 
     end
@@ -59,3 +68,6 @@ p [1, 2, 3, 4].my_select { |x| x % 2 == 0}
 puts
 p [1, 2, 3, 4].select { |x| x % 2 == 0 }#compare
 puts
+p ['alpha', 'apple', 'allen key'].my_all?{ |x| x[0] == 'a' }
+puts
+p ['alpha', 'apple', 'allen key'].all?{ |x| x[0] == 'a' }
