@@ -29,7 +29,6 @@ module Enumerable
 
     def my_all?
         i = 0
-        
         while i < self.size
             unless yield(self[i])
                 return false
@@ -40,7 +39,14 @@ module Enumerable
     end
 
     def my_any?
-
+        i = 0
+        while i < self.size
+            if yield(self[i])
+                return true
+            end
+            i += 1
+        end
+        false
     end
     def my_none?
 
@@ -71,3 +77,7 @@ puts
 p ['alpha', 'apple', 'allen key'].my_all?{ |x| x[0] == 'a' }
 puts
 p ['alpha', 'apple', 'allen key'].all?{ |x| x[0] == 'a' }
+puts
+p ['lpha', 'apple', 'llen key'].my_any?{ |x| x[0] == 'a' }
+puts
+p ['lpha', 'pple', 'allen key'].any?{ |x| x[0] == 'a' }
