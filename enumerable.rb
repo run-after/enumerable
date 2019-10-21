@@ -60,15 +60,42 @@ module Enumerable
         true
     end
 
-    def my_count
+    def my_count(num=0)
+        if block_given? == false && num == 0
+            self.size
+        elsif block_given? == false 
+            i = 0
+            count = 0
+            while i < self.size
+                if self[i] == num
+                    count += 1    
+                end
+                i += 1
+                
+            end
+            count
+        else
+                i = 0
+                count = 0
+            while i < self.size
+                if yield(self[i])
+                    count += 1
+                end
+                i += 1
+            end
+            count
+        end
 
     end
+
     def my_map
 
     end
+
     def my_inject
 
     end
+
 end
 
 [1, 2, 3, 5].my_each { |x| p x }
@@ -94,3 +121,7 @@ puts
 p ['lpha', 'pple', 'llen key'].my_none?{ |x| x[0] == 'a' }
 puts
 p ['lpha', 'pple', 'llen key'].none?{ |x| x[0] == 'a' }
+puts
+p [1,2,3,4,4,7,7,7,9].my_count { |i| i > 1 }
+puts
+p [1,2,3,4,4,7,7,7,9].count { |i| i > 1 }
