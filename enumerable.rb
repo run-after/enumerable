@@ -86,11 +86,15 @@ module Enumerable
         end
     end
 
-    def my_map
+    def my_map(&proc)
         i = 0
         array2 = []
         while i < self.size
-            array2 << yield(self[i])
+            if block_given?
+                array2 << yield(self[i])
+            else
+                array2 << proc.call(self[i])
+            end
             i += 1
         end
         array2
@@ -106,8 +110,14 @@ module Enumerable
        accumulator
     end
 
+
+
 end
 
+def multiply_els(array)
+    array.my_inject(1) { |x, y| x * y }
+end
+=begin
 [1, 2, 3, 5].my_each { |x| p x }
 puts
 [1, 2, 3, 5].each { |x| p x } #compare
@@ -143,3 +153,10 @@ puts
 p [1,2,3,4,4,7,7,7,9].my_inject(0){|running_total, item| running_total + item }
 puts
 p [1,2,3,4,4,7,7,7,9].inject(0){|running_total, item| running_total + item }
+puts 
+p multiply_els([2,4,5])
+=end
+my_proc = Proc.new { |i| i*4 }
+p [1,2,3,4,4,7,7,7,9].my_map { |i| i*4 }
+puts
+p [1,2,3,4,4,7,7,7,9].my_map(&my_proc)
