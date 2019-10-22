@@ -60,8 +60,8 @@ module Enumerable
         true
     end
 
-    def my_count(num=0)
-        if block_given? == false && num == 0
+    def my_count(num='')
+        if block_given? == false && num == ''
             self.size
         elsif block_given? == false 
             i = 0
@@ -94,11 +94,16 @@ module Enumerable
             i += 1
         end
         array2
-
     end
 
-    def my_inject
-
+    def my_inject(start = 0)
+       i = 0
+       accumulator = start
+       while i < self.size
+            accumulator = yield(accumulator, self[i])
+            i += 1
+       end
+       accumulator
     end
 
 end
@@ -131,6 +136,10 @@ p [1,2,3,4,4,7,7,7,9].my_count { |i| i > 1 }
 puts
 p [1,2,3,4,4,7,7,7,9].count { |i| i > 1 }
 puts
-p [1,2,3,4,4,7,7,7,9].my_map { |i| i * 2 }
+p [1,2,3,4,4,7,7,7,9].my_map { |i| i*4 }
 puts
-p [1,2,3,4,4,7,7,7,9].map { |i| i*2 }
+p [1,2,3,4,4,7,7,7,9].map { |i| i*4 }
+puts 
+p [1,2,3,4,4,7,7,7,9].my_inject(0){|running_total, item| running_total + item }
+puts
+p [1,2,3,4,4,7,7,7,9].inject(0){|running_total, item| running_total + item }
